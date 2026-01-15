@@ -1,38 +1,75 @@
-#Room Booking REST API
-Uma API REST desenvolvida com Node.js e TypeScript para gerenciar reservas de salas. O projeto foi criado como exercício prático de arquitetura de software e fundamentos de TypeScript.
-A API simula um sistema de reserva de salas usado em empresas, universidades e espaços de coworking, onde é possível criar salas e fazer reservas respeitando restrições de horário e regras de negócio.
-Por que fiz esse projeto
-Queria praticar e entender melhor:
+ Room Booking REST API
 
-Tipagem estática do TypeScript
-Interfaces e contratos
-Generics em casos reais
+Uma API REST desenvolvida com Node.js e TypeScript para gerenciar reservas de salas, criada como projeto de estudo prático com foco em arquitetura de software e fundamentos avançados de TypeScript.
+
+O sistema simula um cenário real utilizado em empresas, universidades e espaços de coworking, onde é possível cadastrar salas e realizar reservas respeitando regras de negócio e restrições de horário.
+
+ Objetivo do Projeto
+
+Este projeto foi desenvolvido com o objetivo de aprofundar o entendimento e a aplicação prática de:
+
+Tipagem estática com TypeScript
+
+Interfaces e contratos entre camadas
+
+Uso de Generics em cenários reais
+
 Programação assíncrona com async/await
-Organização limpa e escalável de projetos
-Separação de responsabilidades (rotas, controllers, services, repositories)
+
+Organização limpa e escalável de projetos backend
+
+Separação de responsabilidades (Routes, Controllers, Services e Repositories)
+
 Princípios de design de APIs REST
 
-O que o sistema faz
-Sala (Room)
+ Domínio da Aplicação
+ Room (Sala)
+
 Representa uma sala física que pode ser reservada.
 
-id, name, capacity, resources, active
+Atributos principais:
 
-Reserva (Booking)
-Representa uma reserva de sala em um período específico.
+id
 
-id, roomId, startTime, endTime, createdAt
+name
 
-Stack
+capacity
 
-Node.js – runtime JavaScript
-TypeScript – tipagem estática
-Express – framework HTTP minimalista
-UUID – geração de IDs únicos
-Day.js – manipulação de datas
-Armazenamento em memória – para focar na lógica sem configurar banco de dados
+resources
 
-Estrutura do projeto
+active
+
+ Booking (Reserva)
+
+Representa uma reserva de uma sala em um intervalo de tempo específico.
+
+Atributos principais:
+
+id
+
+roomId
+
+startTime
+
+endTime
+
+createdAt
+
+ Stack Utilizada
+
+Node.js — Runtime JavaScript
+
+TypeScript — Tipagem estática e segurança em tempo de desenvolvimento
+
+Express — Framework HTTP minimalista
+
+UUID — Geração de identificadores únicos
+
+Day.js — Manipulação e validação de datas
+
+Armazenamento em memória — Foco total na lógica e arquitetura, sem dependência de banco de dados
+
+ Estrutura do Projeto
 src/
  ├── server.ts
  ├── app.ts
@@ -59,48 +96,68 @@ src/
  └── utils/
       ├── api-response.ts
       └── date-validator.ts
-Como as camadas funcionam
 
-Routes: definem apenas os endpoints HTTP
-Controllers: lidam com request/response
-Services: contêm as regras de negócio
-Repositories: abstraem o acesso aos dados
-Interfaces: definem contratos entre camadas
-DTOs: validam e controlam dados de entrada
-Utils: lógica reutilizável e genérica
+ Organização das Camadas
 
-Essa separação facilita manutenção, testes e crescimento futuro do código.
-Funcionalidades
+Routes
+Definem apenas os endpoints HTTP e seus métodos.
+
+Controllers
+Lidam com request e response, validam entradas e delegam a lógica.
+
+Services
+Contêm as regras de negócio e orquestram o fluxo da aplicação.
+
+Repositories
+Abstraem o acesso aos dados, permitindo fácil troca da fonte de persistência.
+
+Interfaces
+Definem contratos claros entre as camadas, garantindo baixo acoplamento.
+
+DTOs
+Controlam e validam os dados de entrada da API.
+
+Utils
+Contêm funções reutilizáveis e genéricas.
+
+Essa separação melhora manutenção, testabilidade e evolução futura do sistema.
+
+ Funcionalidades
 
 Criar, listar, atualizar e desativar salas
+
 Criar reservas com validação de horário
+
 Impedir reservas sobrepostas para a mesma sala
-Validar intervalos de tempo das reservas
-Respostas padronizadas da API usando generics
+
+Validar intervalos de tempo (datas passadas, períodos inválidos)
+
+Respostas padronizadas utilizando Generics
+
 Separação clara entre erros técnicos e violações de regras de negócio
 
-Programação assíncrona
-Todas as operações de services e repositories são assíncronas, simulando comportamento de banco de dados real e reforçando o uso correto de:
+ Programação Assíncrona
+
+Todas as operações nas camadas de services e repositories são assíncronas, simulando o comportamento de um banco de dados real e reforçando o uso correto de:
 
 Promises
+
 async/await
+
 Tratamento de erros com try/catch
-Propagação de erros entre camadas
 
-O que poderia adicionar
+Propagação controlada de erros entre camadas
 
-Persistência com banco de dados real
-Autenticação e autorização
-Paginação e filtros
-Testes unitários e de integração
-Suporte Docker
-Documentação da API com Swagger
+ Aprendizados
 
-O que aprendi
-Completar esse projeto me deu experiência prática com:
+O desenvolvimento deste projeto proporcionou experiência prática com:
 
 Padrões reais de TypeScript
-Arquitetura backend limpa
-Tipagem forte em todas as camadas da aplicação
-Design de APIs com regras de negócio
-Preparar um código para crescer em produção
+
+Arquitetura backend limpa e escalável
+
+Tipagem forte em todas as camadas
+
+Design de APIs orientadas a regras de negócio
+
+Preparação de código para crescimento em ambiente de produção
