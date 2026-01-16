@@ -1,4 +1,4 @@
-import express, { Application } from "express";
+import express, { Application, Response, Request } from "express";
 
 class App {
   public app: Application;
@@ -9,9 +9,16 @@ class App {
     this.routes();
   }
 
-  private middlewares(): void {}
+  private middlewares(): void {
+    this.app.use(express.urlencoded({ extended: true }));
+    this.app.use(express.json());
+  }
 
-  private routes(): void {}
+  private routes(): void {
+    this.app.use('/', (req: Request, res: Response) => {
+      res.send("Oi.");
+    });
+  }
 }
 
 export default new App().app;
