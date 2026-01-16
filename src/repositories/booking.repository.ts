@@ -6,8 +6,8 @@ export class BookingRepository implements Repository<Booking> {
   private redis = getRedisClient();
 
   async create(data: Booking): Promise<Booking> {
-    const id = String(data.id);
-    const roomId = String(data.roomId);
+    const id = data.id;
+    const roomId = data.roomId;
 
     await this.redis.set(
       `booking:${id}`,
@@ -53,25 +53,6 @@ export class BookingRepository implements Repository<Booking> {
     );
 
     return bookings.filter((b): b is Booking => b !== null);
-  }
-
-  async update(id: string, data: Partial<Booking>): Promise<Booking | null> {
-    const existing = await this.findById(id);
-    if (!existing) return null;
-
-    const updated: Booking = {
-      ...existing,
-      ...data,
-      id: existing.id,
-      roomId: existing.roomId,
-    };
-
-    await this.redis.set(
-      `booking:${id}`,
-      JSON.stringify(updated)
-    );
-
-    return updated;
   }
 
   async remove(id: string): Promise<boolean> {
