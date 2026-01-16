@@ -1,5 +1,5 @@
 export interface Room {
-    readonly id: number;
+    readonly id: string;
     name: string;
     capacity: number;
     resources: string[];

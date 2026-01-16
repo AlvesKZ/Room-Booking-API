@@ -6,7 +6,7 @@ export class RoomRepository implements Repository<Room> {
   private redis = getRedisClient();
 
   async create(data: Room): Promise<Room> {
-    const id = String(data.id);
+    const id = data.id;
 
     await this.redis.set(`room:${data.id}`, JSON.stringify(data));
 
